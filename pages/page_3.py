@@ -1,5 +1,5 @@
 import streamlit as st
-from PIL import Image
+
 with st.expander("See explanation"):
     st.write("The chart above shows some interesting insights about...")
 
