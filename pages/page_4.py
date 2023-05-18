@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-
+import openpyxl
 # データ分析
 df = pd.read_csv('./data/data2.csv', index_col='日付')
 st.line_chart(df)
@@ -18,12 +18,12 @@ def main():
 
         try:
             if file_extension == "csv":
-                df = pd.read_csv(file, encoding="utf-8")
+                df2 = pd.read_csv(file, encoding="utf-8")
             elif file_extension == "xlsx":
-                df = pd.read_excel(file, engine="openpyxl")
+                df2 = pd.read_excel(file)#, encoding="openpyxl")
 
             st.write("データフレームの内容:")
-            st.dataframe(df)
+            st.dataframe(df2)
 
         except Exception as e:
             st.error("ファイルの読み込み中にエラーが発生しました。")
