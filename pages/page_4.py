@@ -13,14 +13,13 @@ uploaded_file = st.file_uploader("Choose a PDF file", type='pdf')
 
 if uploaded_file is not None:
     # PDFファイルを読み込む
-    pdf_reader = PyPDF2.PdfFileReader(uploaded_file)
+    pdf_reader = PdfReader(uploaded_file)
 
     # ページ数を取得
-    total_pages = pdf_reader.numPages
+    total_pages = len(pdf_reader.pages)
 
     # 各ページを読み込み、テキストとして表示
-    for page_number in range(total_pages):
-        page = pdf_reader.getPage(page_number)
+    for page in pdf_reader.pages:
         text = page.extract_text()
         st.text(text)
 def main():
