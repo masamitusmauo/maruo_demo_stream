@@ -8,19 +8,21 @@ df = pd.read_csv('./data/data2.csv', index_col='日付')
 st.line_chart(df)
 st.bar_chart(df)
 
-st.title("PDF Viewer")
-uploaded_file = st.file_uploader("Choose a PDF file", type="pdf")
+# ファイルアップロードのプロンプトを作成
+uploaded_file = st.file_uploader("Choose a PDF file", type='pdf')
 
 if uploaded_file is not None:
+    # PDFファイルを読み込む
     pdf_reader = PyPDF2.PdfFileReader(uploaded_file)
-    num_pages = pdf_reader.numPages
-    st.write(f"Number of pages: {num_pages}")
 
-    for page_number in range(1, num_pages + 1):
-        page = pdf_reader.getPage(page_number - 1)
-        text = page.extractText()
-        st.subheader(f"Page {page_number}")
-        st.write(text)
+    # ページ数を取得
+    total_pages = pdf_reader.numPages
+
+    # 各ページを読み込み、テキストとして表示
+    for page_number in range(total_pages):
+        page = pdf_reader.getPage(page_number)
+        text = page.extract_text()
+        st.text(text)
 def main():
     st.title("ファイルを読み込んでデータフレームを表示する")
 
