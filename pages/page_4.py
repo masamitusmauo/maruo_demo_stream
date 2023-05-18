@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import PyPDF2
 import openpyxl
 
 # データ分析
@@ -8,20 +7,6 @@ df = pd.read_csv('./data/data2.csv', index_col='日付')
 st.line_chart(df)
 st.bar_chart(df)
 
-# ファイルアップロードのプロンプトを作成
-uploaded_file = st.file_uploader("Choose a PDF file", type='pdf')
-
-if uploaded_file is not None:
-    # PDFファイルを読み込む
-    pdf_reader = PdfReader(uploaded_file)
-
-    # ページ数を取得
-    total_pages = len(pdf_reader.pages)
-
-    # 各ページを読み込み、テキストとして表示
-    for page in pdf_reader.pages:
-        text = page.extract_text()
-        st.text(text)
 def main():
     st.title("ファイルを読み込んでデータフレームを表示する")
 
